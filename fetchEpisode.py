@@ -1,3 +1,11 @@
+#!/usr/bin/python
+''' 
+									Module 2
+
+	Basic Idea : Get Details from user set config files and fetch the episode list.
+	Input : ConfigJSON file from the localStorage  
+	Output : List of EpisodesNumber and EpisodeSNames that needs to be downloaded
+'''
 import requests 
 import re
 from bs4 import BeautifulSoup
