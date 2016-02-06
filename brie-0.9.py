@@ -20,7 +20,3 @@ for item in fl_name:
 for item in fl_magnet:
     if "720" in item.get("title"):
         print item.get("href") # print magnet link.
-
-# To fix : 
-# * Prints ALL episodes from page. Option to select episodes.
-# * Works for 720p versions, can be tuned according to preferences.
