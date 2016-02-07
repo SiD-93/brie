@@ -9,6 +9,7 @@
 '''
 # For all the Json functions 
 import json
+from fetchEpisode import getListings
 
 # Read individual Series data
 def readSeriesData():
@@ -51,6 +52,10 @@ def readConfigData():
 	# return allSeries, emailRem, email
 
 
+
+
 # Print to terminal/console 
-print readConfigData()
+# print readConfigData()
+
+getListings()
 

@@ -11,30 +11,31 @@ import re
 from bs4 import BeautifulSoup
 
 
-tvShow = raw_input(">>Enter the Name of the TV show\n-->")
+def getListings():
+	tvShow = raw_input(">>Enter the Name of the TV show\n-->")
 
-link = "http://www.tv.com/shows/" + tvShow + "/episodes/"
+	link = "http://www.tv.com/shows/" + tvShow + "/episodes/"
 
-pageData = requests.get(link)
+	pageData = requests.get(link)
 
-soup = BeautifulSoup(pageData.content, "lxml")
+	soup = BeautifulSoup(pageData.content, "lxml")
 
-lisOfEpisodesName = soup.find_all("a", {"class": "title"})
-lisOfEpisodesNumber = soup.find_all("div", {"class": "ep_info"})
+	lisOfEpisodesName = soup.find_all("a", {"class": "title"})
+	lisOfEpisodesNumber = soup.find_all("div", {"class": "ep_info"})
 
-episodeName = []
-episodeNumber = []
+	episodeName = []
+	episodeNumber = []
 
-for nameOfEpisode in lisOfEpisodesName:
-	episodeName.append(str(nameOfEpisode.text))
-	# print nameOfEpisode.text
+	for nameOfEpisode in lisOfEpisodesName:
+		episodeName.append(str(nameOfEpisode.text))
+		# print nameOfEpisode.text
 
-for numberOfEpisode in lisOfEpisodesNumber:
+	for numberOfEpisode in lisOfEpisodesNumber:
 
-	episodeNumber.append((str(numberOfEpisode.text).strip()))
-	# print numberOfEpisode.text
-# print lisOfEpisodes
+		episodeNumber.append((str(numberOfEpisode.text).strip()))
+		# print numberOfEpisode.text
+	# print lisOfEpisodes
 
 
-for x in xrange(0, len(episodeNumber)):
-	print episodeNumber[x], "=>", episodeName[x]
+	for x in xrange(0, len(episodeNumber)):
+		print episodeNumber[x], "=>", episodeName[x]
