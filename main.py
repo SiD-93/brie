@@ -20,7 +20,7 @@ def readSeriesData():
 		print val + "==>" + listing[val]
 	# season = raw_input(">>Enter the season which you're watching:\n--> ").strip()
 	episode = raw_input("\n>>Enter the latest episode(NUMBER) you saw:\n--> ").strip()
-
+	# quality = raw_input("\n>>Enter the quality of episode(NUMBER) you saw:\n--> ").strip()
 	# TODO add download quality
 	return { 'series': series, 'episode': "Episode " + episode, 'season': listing['season']}
 
