@@ -11,8 +11,8 @@ import re
 from bs4 import BeautifulSoup
 
 
-def getListings():
-	tvShow = raw_input(">>Enter the Name of the TV show\n-->")
+def getListings(tvShow):
+	# tvShow = raw_input(">>Enter the Name of the TV show\n-->")
 
 	link = "http://www.tv.com/shows/" + tvShow + "/episodes/"
 
@@ -22,7 +22,15 @@ def getListings():
 
 	lisOfEpisodesName = soup.find_all("a", {"class": "title"})
 	lisOfEpisodesNumber = soup.find_all("div", {"class": "ep_info"})
+	
 
+	# Fetch the latest season 
+	season = soup.find_all("a", {"class": "season_name"})
+
+	for tem in season:
+		seasonName  = (str(tem.text)).strip() 
+		break
+		
 	episodeName = []
 	episodeNumber = []
 
@@ -36,6 +44,14 @@ def getListings():
 		# print numberOfEpisode.text
 	# print lisOfEpisodes
 
+	dictOfEpisodes = {}
 
 	for x in xrange(0, len(episodeNumber)):
-		print episodeNumber[x], "=>", episodeName[x]
+		dictOfEpisodes[episodeNumber[x]] = episodeName[x]
+
+	dictOfEpisodes.update({'season': seasonName})
+
+	return dictOfEpisodes
+
+
+# print getListings("friends")

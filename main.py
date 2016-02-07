@@ -9,15 +9,20 @@
 '''
 # For all the Json functions 
 import json
-from fetchEpisode import getListings
+from helper import getListings
 
 # Read individual Series data
 def readSeriesData():
 	series = raw_input(">>Enter the TV series:\n--> ").strip()
-	season = raw_input(">>Enter the season which you're watching:\n--> ").strip()
-	episode = raw_input(">>Enter the latest episode you saw:\n--> ").strip()
+	listing = getListings(series)
+	#TODO *issue solve the sorting problem
+	for val in sorted(listing):
+		print val + "==>" + listing[val]
+	# season = raw_input(">>Enter the season which you're watching:\n--> ").strip()
+	episode = raw_input("\n>>Enter the latest episode(NUMBER) you saw:\n--> ").strip()
 
-	return { 'series': series, 'season': season, 'episode': episode}
+	# TODO add download quality
+	return { 'series': series, 'episode': "Episode " + episode, 'season': listing['season']}
 
 
 
@@ -46,16 +51,24 @@ def readConfigData():
 	configJson = json.dumps(configJson)
 
 	with open('ConfigFile.txt', 'w') as outfile:
-		json.dump(configJson, outfile, sort_keys = True, indent = 4, ensure_ascii=False)	
+		json.dump(configJson, outfile, sort_keys = False, indent = 4, ensure_ascii=False)	
 
 	return configJson
 	# return allSeries, emailRem, email
 
 
+def readFromConfigFile():
+	with open("ConfigFile.txt", 'r') as configFile:
+		data = json.loads(configFile.read())
+
+	return data
 
 
+
+
+# print readFromConfigFile()
+# compareAndCheckForEpisodes()	
 # Print to terminal/console 
-# print readConfigData()
-
-getListings()
+print readConfigData()
+# getListings()
 

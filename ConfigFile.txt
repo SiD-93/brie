@@ -1,1 +1,1 @@
-"{\"emailRem\": \"y\", \"email\": \"goku@goku\", \"allSeries\": {\"arrow\": {\"series\": \"arrow\", \"episode\": \"10\", \"season\": \"2\"}}}"
+"{\"emailRem\": \"n\", \"allSeries\": {\"arrow\": {\"series\": \"arrow\", \"episode\": \"Episode 1\", \"season\": \"Season 4\"}}}"
