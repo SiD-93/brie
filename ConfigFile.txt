@@ -1,1 +1,1 @@
-"{\"emailRem\": \"n\", \"allSeries\": {\"arrow\": {\"series\": \"arrow\", \"episode\": \"Episode 1\", \"season\": \"Season 4\"}}}"
+"{\"emailRem\": \"n\", \"allSeries\": {\"arrow\": {\"series\": \"arrow\", \"episode\": \"Episode 2\", \"season\": \"Season 4\"}}}"

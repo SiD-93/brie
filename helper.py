@@ -9,6 +9,7 @@
 import requests 
 import re
 from bs4 import BeautifulSoup
+import os
 
 
 def getListings(tvShow):
@@ -54,4 +55,38 @@ def getListings(tvShow):
 	return dictOfEpisodes
 
 
-# print getListings("friends")
+
+def downloadEpisodes(episodeList):
+
+	for episode in episodeList:
+		e = episodeList['arrow']['episode']
+		s = episodeList['arrow']['season']
+		ser = episodeList['arrow']['series']
+		queryString = ser + "-" + "s" + ((s[7]) if int(s[7]) > 10 else ('0' + s[7])) + "e" + ((e[8]) if int(e[8]) > 10 else ('0' + e[8]))	
+
+		download(queryString)
+
+
+
+
+
+def download(queryString):
+
+	link = "https://eztv.ag/search/" + queryString
+
+	print link
+
+	pageData = requests.get(link)
+
+	soup = BeautifulSoup(pageData.content, "lxml")
+
+	magnetFiles = soup.find_all("a", {"class": "magnet"})
+
+	for magnet in magnetFiles:
+		downloadMagnet = magnet.get("href")
+		break
+
+	os.startfile(downloadMagnet)
+	
+
+

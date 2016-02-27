@@ -9,7 +9,8 @@
 '''
 # For all the Json functions 
 import json
-from helper import getListings
+from helper import getListings, downloadEpisodes
+import ast
 
 # Read individual Series data
 def readSeriesData():
@@ -47,28 +48,38 @@ def readConfigData():
 		configJson['emailRem'] = emailRem
 
 	
+	
 
 	configJson = json.dumps(configJson)
 
-	with open('ConfigFile.txt', 'w') as outfile:
-		json.dump(configJson, outfile, sort_keys = False, indent = 4, ensure_ascii=False)	
+	
 
+
+	with open('ConfigFile.json', 'w') as outfile:
+		json.dump(configJson, outfile)	
+
+	
 	return configJson
+
 	# return allSeries, emailRem, email
 
 
 def readFromConfigFile():
-	with open("ConfigFile.txt", 'r') as configFile:
-		data = json.loads(configFile.read())
+	with open("ConfigFile.json", 'r') as configFile:
+		data = json.load(configFile)
 
-	return data
+	return ast.literal_eval(data)['allSeries']
+
+	
 
 
+downloadEpisodes(readFromConfigFile())
 
-
+# first()
+# print readConfigData()
 # print readFromConfigFile()
 # compareAndCheckForEpisodes()	
 # Print to terminal/console 
-print readConfigData()
+# print readFromConfigFile()
 # getListings()
 
