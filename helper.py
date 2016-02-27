@@ -59,15 +59,15 @@ def getListings(tvShow):
 def downloadEpisodes(episodeList):
 
 	for episode in episodeList:
-		e = episodeList['arrow']['episode']
-		s = episodeList['arrow']['season']
-		ser = episodeList['arrow']['series']
-		queryString = ser + "-" + "s" + ((s[7]) if int(s[7]) > 10 else ('0' + s[7])) + "e" + ((e[8]) if int(e[8]) > 10 else ('0' + e[8]))	
+		e = episodeList[episode]['episode']
+		s = episodeList[episode]['season']
+		ser = episodeList[episode]['series']
+		ss = ((re.findall(r'\d+', s))[0]) if ((re.findall(r'\d+', s))[0]) >= 10 else ('0' + str((re.findall(r'\d+', s))[0]))
+		ee = (re.findall(r'\d+', e))[0] if (((re.findall(r'\d+', e))[0])) >= 10 else ('0' + str((re.findall(r'\d+', e))[0]))
+ 
+		queryString = ser + "-" + "s" + ss + "e" + ee
 
 		download(queryString)
-
-
-
 
 
 def download(queryString):
@@ -86,7 +86,12 @@ def download(queryString):
 		downloadMagnet = magnet.get("href")
 		break
 
-	os.startfile(downloadMagnet)
+	try:
+		os.startfile(downloadMagnet)
+		
+	except:
+		print "Sorry Torrent not Found, Please Refine your search!"
+		return
 	
 
 

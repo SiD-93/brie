@@ -72,11 +72,11 @@ def readFromConfigFile():
 
 	
 
-
+print readConfigData()
 downloadEpisodes(readFromConfigFile())
 
 # first()
-# print readConfigData()
+
 # print readFromConfigFile()
 # compareAndCheckForEpisodes()	
 # Print to terminal/console 
