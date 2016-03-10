@@ -62,11 +62,13 @@ def downloadEpisodes(episodeList):
 		e = episodeList[episode]['episode']
 		s = episodeList[episode]['season']
 		ser = episodeList[episode]['series']
-		ss = ((re.findall(r'\d+', s))[0]) if ((re.findall(r'\d+', s))[0]) >= 10 else ('0' + str((re.findall(r'\d+', s))[0]))
-		ee = (re.findall(r'\d+', e))[0] if (((re.findall(r'\d+', e))[0])) >= 10 else ('0' + str((re.findall(r'\d+', e))[0]))
+		ss = ((re.findall(r'\d+', s))[0]) if (int(str((re.findall(r'\d+', s))[0]))) >= 10 else ('0' + str((re.findall(r'\d+', s))[0]))
+		ee = (re.findall(r'\d+', e))[0] if ((int(str((re.findall(r'\d+', e))[0])))) >= 10 else ('0' + str((re.findall(r'\d+', e))[0]))
  
 		queryString = ser + "-" + "s" + ss + "e" + ee
 
+
+		
 		download(queryString)
 
 
