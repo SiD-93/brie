@@ -74,7 +74,7 @@ def downloadEpisodes(episodeList):
 
 def download(queryString):
 
-	link = "https://eztv.ag/search/" + queryString
+	link = "https://eztv.it/search/" + queryString
 
 	print link
 
