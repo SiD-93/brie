@@ -25,3 +25,4 @@ Episodes of 720p are queued by default and settings for quality are on the way.
 - [x] Quality selector.
 - [ ] Daemonize or run with cron.
 - [ ] Add scraper and downloader.
+- [ ] UI or go OG with only CLI?
