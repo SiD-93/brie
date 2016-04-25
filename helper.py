@@ -1,45 +1,66 @@
 #!/usr/bin/env python2
-import requests, json
+import requests, json, os
 
 config = {
 'quality': '',
 'shows': [],
 }
+l = {
+'name': '',
+'season': '',
+'lastEpisode': ''
+}
 
-qual = input('Enter quality: ')
-config['quality'] = qual
+home = os.environ['HOME']
+confDir = home + '/.config/brie'
 
-def show():
-    l = {
-    'name': '',
-    'season': ''
-    }
+def adder():
     n = raw_input('Enter show name: ')
     l['name'] = n
-    s = raw_input('Enter season: ')
+    s = input('Enter season: ')
     l['season'] = s
-    print l
-    config['shows'].append(l)
-show()
-show()
-print config
+    last = input('Enter the last episode you watched: ')
+    l['lastEpisode'] = last
+    return l
 
-with open('./conf.json', 'w') as f:
-    json.dump(config, f, indent=1)
-    f.close()
+def writer(confDict):
+    with open(confDir+'/config.json', 'w') as f:
+        json.dump(confDict, f, indent=1)
+        f.close()
 
-#makeConf()
+def firstConfig():
+    qual = input('Enter quality: ')
+    config['quality'] = qual
+    config['shows'].append(adder())
+    writer(config)
+
+def append():
+    with open(confDir+'/config.json', 'r') as f:
+        config = json.load(f)
+        config['shows'].append(adder())
+        writer(config)
+
+
+def main():
+    if not os.path.exists(confDir):
+        os.makedirs(confDir)
+
+    if (os.path.exists(confDir+'/config.json')) == False:
+        firstConfig()
+    else:
+        append()
+
+main()
+
+
 #show = 'silicon valley'
 #payload = {'q': show}
 #searchBase = 'http://api.tvmaze.com/singlesearch/shows'
 #showData = requests.get(searchBase, params=payload)
-##print (type(showData.json()))
+#print (type(showData.json()))
 #showID = str(showData.json()['id'])
 #episodesList = requests.get('http://api.tvmaze.com/shows/'+showID+'/episodes')
-##print('http://api.tvmaze.com/shows/'+showID+'/episodes')
+#print('http://api.tvmaze.com/shows/'+showID+'/episodes')
 #print (episodesList.json()[0]['season'])
 #print (episodesList.json()[0]['name'])
-##print shows['id']
-##with open('./show.json', 'w') as f:
-##	json.dump(r.json(), f, indent=1)
-##	f.close()
+#print shows['id']
