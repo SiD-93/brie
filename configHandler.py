@@ -1,14 +1,16 @@
 #!/usr/bin/env python2
 import requests, json, os
 
+# Skeleton structure of the configuration file.
 config = {
 'quality': '',
 'shows': [],
 }
+
 l = {
 'name': '',
 'season': '',
-'lastEpisode': ''
+'lastWatched': ''
 }
 
 home = os.environ['HOME']
@@ -20,7 +22,7 @@ def adder():
     s = input('Enter season: ')
     l['season'] = s
     last = input('Enter the last episode you watched: ')
-    l['lastEpisode'] = last
+    l['lastWatched'] = last
     return l
 
 def writer(confDict):
@@ -29,7 +31,7 @@ def writer(confDict):
         f.close()
 
 def firstConfig():
-    qual = input('Enter quality: ')
+    qual = input('Enter the default quality of episodes: ')
     config['quality'] = qual
     config['shows'].append(adder())
     writer(config)
